@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import br.com.gabriel.products_registration.entity.Product;
 import br.com.gabriel.products_registration.repository.ProductRepository;
 
@@ -30,9 +31,9 @@ public class ProductService {
 		}
 	}
 	
-	public ResponseEntity<String> create(Product product) {		
-		 	var savedProduct = productRepository.save(product);
-		    return ResponseEntity.status(HttpStatus.CREATED).body("Product created with success ");
+	public ResponseEntity<Product> create(@RequestBody Product product) {		
+		 Product savedProduct = productRepository.save(product);   
+		 return ResponseEntity.status(HttpStatus.CREATED).body(savedProduct);
 	}
 	
 	public ResponseEntity<String> updateById(Product product, Long id_product) {
